@@ -1,14 +1,13 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
-import Logo from "../../public/assets/dynamicsLogo.svg";
 import SideNavItem from "./SideNavItem";
 
-const SideNav = (props) => {
-    const [activeNav, setActiveNav] = useState("Home");
-    const [extended, setExtended] = useState(true);
+const SideNav = ({activeNav, setActiveNav, extended}) => {
     return (
-        <nav className="fixed left-0 pt-[35px] w-[178px] bg-[#5F6FEE] h-screen ">
+        <nav style={{width: extended ? '178px' : '74px'}} className={"transition-all fixed left-0 pt-[35px] bg-[#5F6FEE] h-screen "}>
             <div className="flex justify-center mb-[60px]">
-                <img src="./assets/dynamicsLogo.svg" />
+                {extended && <img src="./assets/dynamicsLogo.svg" />}
+                {!extended && <img src="./assets/dynamicsLogoNoText.svg" />}
             </div>
             <section className="flex flex-col gap-y-[40px] pl-[27px] mb-[90px]">
                 <SideNavItem isExtended={extended} setActiveNav={setActiveNav} name="Home" iconPath="./assets/homeIcon.svg" isActive={activeNav == "Home"} />
@@ -20,7 +19,7 @@ const SideNav = (props) => {
                 <SideNavItem isExtended={extended} setActiveNav={setActiveNav} name="Settings" iconPath="./assets/settingsIcon.svg" isActive={activeNav == "Settings"} />
             </section>
             <div className="pl-[27px]">
-                <SideNavItem name="Logout" iconPath="./assets/logoutIcon.svg" isActive={true}/>
+                <SideNavItem name="Logout" iconPath="./assets/logoutIcon.svg" isActive={true} isExtended={extended}/>
             </div>
         </nav>
     );

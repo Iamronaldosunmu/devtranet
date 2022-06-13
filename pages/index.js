@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAuth } from "../components/AuthContext";
+import SideNav from "../components/nav/SideNav";
 
 export default function Index({ user, projects, events, loggedIn }) {
   const auth = useAuth();
@@ -11,7 +12,11 @@ export default function Index({ user, projects, events, loggedIn }) {
       router.push("/login");
   }, [router]);
 
-  return <div>hell</div>;
+  return (
+    <div>
+      <SideNav />
+    </div>
+  );
 }
 
 export async function getServerSideProps({ req, res }) {
